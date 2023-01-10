@@ -11,11 +11,9 @@ public class DroneLoad {
     @Id
     @Column(name="DRONE_ID")
     private Long id;
-    @OneToOne(optional=false, mappedBy="droneLoad")
-    private Drone drone;
 
-    @OneToMany(mappedBy="droneLoad")
-    private List<Medication> medication;
+    @OneToOne
+    private Medication medication;
     private int amount;
 }
 /*
