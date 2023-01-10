@@ -16,7 +16,7 @@ public class Medication {
     private String code; // allowed only upper case letters, underscore and numbers
 
     @OneToOne
-    @JoinColumn(name="MEDICATION_ID", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name="ID", unique=true, nullable=false, updatable=false)
     private MedicationImage image;
 
     public Medication(int weight, String code) {

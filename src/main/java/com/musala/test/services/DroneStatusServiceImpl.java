@@ -18,8 +18,8 @@ public class DroneStatusServiceImpl implements BasicService<DroneStatus> {
     }
 
     @Override
-    public Optional<DroneStatus> fetch(long droneId) {
-        return droneStatusRepository.findById(droneId);
+    public Optional<DroneStatus> fetch(long id) {
+        return null;
     }
 
     @Override

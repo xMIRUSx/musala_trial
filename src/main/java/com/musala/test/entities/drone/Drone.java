@@ -24,19 +24,19 @@ public class Drone {
 
     private String serialNo;
 
-    private DroneModel model;
+    private String model;
 
-    private int weightLimit;
+    private short weightLimit;
 
     @OneToOne
-    @JoinColumn(name="DRONE_ID", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name="ID", unique=true, nullable=false, updatable=false)
     private DroneStatus status;
 
     @OneToMany
     @JoinColumn(name="DRONE_ID", unique=false, nullable=false, updatable=false)
     private List<DroneLoad> load;
 
-    public Drone(String serialNo, DroneModel model, int weightLimit) {
+    public Drone(String serialNo, String model, short weightLimit) {
         this.serialNo = serialNo;
         this.model = model;
         if (weightLimit < 0 && weightLimit > MAX_WEIGHT)
@@ -56,19 +56,19 @@ public class Drone {
         this.serialNo = serialNo;
     }
 
-    public DroneModel getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(DroneModel model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    public int getWeightLimit() {
+    public short getWeightLimit() {
         return weightLimit;
     }
 
-    public void setWeightLimit(int weightLimit) {
+    public void setWeightLimit(short weightLimit) {
         this.weightLimit = weightLimit;
     }
 

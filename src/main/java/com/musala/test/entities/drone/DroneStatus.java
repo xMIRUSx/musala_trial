@@ -9,25 +9,19 @@ public class DroneStatus {
     }
 
     @Id
-    @OneToOne
+    private Long droneId;
+    @OneToOne(mappedBy="status")
     @MapsId
-    @JoinColumn(name ="drone_id")
+    @JoinColumn(name="drone_id")
     private Drone drone;
     private float batteryLevel;
-    private State state;
+    private String state;
     private int totalLoadWeight;
 
-    public DroneStatus(Drone drone) {
-        this.drone = drone;
+    public DroneStatus(Long droneId) {
+        this.droneId = droneId;
     }
 
-    public Drone getDrone() {
-        return drone;
-    }
-
-    public void setDrone(Drone drone) {
-        this.drone = drone;
-    }
 
     public float getBatteryLevel() {
         return batteryLevel;
@@ -37,11 +31,11 @@ public class DroneStatus {
         this.batteryLevel = batteryLevel;
     }
 
-    public State getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(String state) {
         this.state = state;
     }
 

@@ -12,9 +12,12 @@ public class DroneLoad {
     @Id
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name="DRONE_ID", insertable=false, updatable=false)
     private Drone drone;
 
     @OneToOne
+    @JoinColumn(name="MEDICATION_ID", insertable=false, updatable=false)
     private Medication medication;
     private int amount;
 }
