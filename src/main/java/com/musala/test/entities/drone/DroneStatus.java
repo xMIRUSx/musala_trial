@@ -9,9 +9,9 @@ public class DroneStatus {
     }
 
     @Id
-    @Column(name="DRONE_ID")
-    private Long id;
-    @OneToOne(optional=false, mappedBy="droneStatus")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name ="drone_id")
     private Drone drone;
     private float batteryLevel;
     private State state;
@@ -19,10 +19,6 @@ public class DroneStatus {
 
     public DroneStatus(Drone drone) {
         this.drone = drone;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public Drone getDrone() {

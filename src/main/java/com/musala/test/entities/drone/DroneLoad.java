@@ -2,6 +2,7 @@ package com.musala.test.entities.drone;
 
 import com.musala.test.entities.medication.Medication;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.Reference;
 
 import java.util.List;
 
@@ -9,15 +10,11 @@ import java.util.List;
 public class DroneLoad {
 
     @Id
-    @Column(name="DRONE_ID")
     private Long id;
+
+    private Drone drone;
 
     @OneToOne
     private Medication medication;
     private int amount;
 }
-/*
-drone_id; med_id; amount
-drone_id; med_id; amount
-drone_id; med_id; amount
- */

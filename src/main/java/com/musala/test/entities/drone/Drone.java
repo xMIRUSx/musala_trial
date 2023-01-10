@@ -33,7 +33,7 @@ public class Drone {
     private DroneStatus status;
 
     @OneToMany
-    @JoinColumn(name="DRONE_ID", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name="DRONE_ID", unique=false, nullable=false, updatable=false)
     private List<DroneLoad> load;
 
     public Drone(String serialNo, DroneModel model, int weightLimit) {
