@@ -5,10 +5,11 @@ import com.musala.test.repositories.DroneLoadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DroneLoadServiceImpl implements BasicService<DroneLoad> {
+public class DroneLoadServiceImpl implements DroneLoadService {
     @Autowired
     DroneLoadRepository droneLoadRepository;
 
@@ -25,5 +26,16 @@ public class DroneLoadServiceImpl implements BasicService<DroneLoad> {
     @Override
     public void delete(DroneLoad obj) {
         droneLoadRepository.delete(obj);
+    }
+
+    @Override
+    public DroneLoad getReferenceById(long objId) {
+        return droneLoadRepository.getReferenceById(objId);
+    }
+
+
+    @Override
+    public List<DroneLoad> getLoadForDrone(long droneId) {
+        return droneLoadRepository.findByDroneId(droneId);
     }
 }

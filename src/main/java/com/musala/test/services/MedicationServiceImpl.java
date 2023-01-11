@@ -26,4 +26,9 @@ public class MedicationServiceImpl implements BasicService<Medication> {
     public void delete(Medication obj) {
         medicationRepository.delete(obj);
     }
+
+    @Override
+    public Medication getReferenceById(long objId) {
+        return medicationRepository.getReferenceById(objId);
+    }
 }

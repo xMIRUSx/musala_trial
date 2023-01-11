@@ -26,4 +26,11 @@ public class DroneServiceImpl implements BasicService<Drone> {
     public void delete(Drone obj) {
         droneRepository.delete(obj);
     }
+
+    @Override
+    public Drone getReferenceById(long objId) {
+        return droneRepository.getReferenceById(objId);
+    }
+
+
 }

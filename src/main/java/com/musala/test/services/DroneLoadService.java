@@ -1,15 +1,11 @@
 package com.musala.test.services;
 
 import com.musala.test.entities.drone.DroneLoad;
+import com.musala.test.entities.drone.DroneStatus;
 
-public interface DroneLoadService {
+import java.util.List;
 
-    public DroneLoad save(DroneLoad load);
+public interface DroneLoadService extends BasicService<DroneLoad> {
 
-    public DroneLoad update(DroneLoad load);
-
-    public DroneLoad fetch(long droneId);
-
-    public void delete(DroneLoad load);
-
+    public List<DroneLoad> getLoadForDrone(long droneId);
 }

@@ -1,15 +1,10 @@
 package com.musala.test.services;
 
 import com.musala.test.entities.drone.DroneStatus;
-import com.musala.test.entities.drone.DroneStatusId;
 
-public interface DroneStatusService {
+import java.util.List;
 
-    public DroneStatus save(DroneStatus status);
+public interface DroneStatusService extends BasicService<DroneStatus> {
 
-    public DroneStatus update(DroneStatus status);
-
-    public DroneStatus fetch(DroneStatusId id);
-
-    public void delete(DroneStatus status);
+    public List<DroneStatus> findAvailableForLoading(List<String> states, double battery);
 }

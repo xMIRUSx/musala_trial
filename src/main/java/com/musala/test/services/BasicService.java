@@ -8,4 +8,6 @@ public interface BasicService<T> {
     public Optional<T> fetch(long objId);
 
     public void delete(T obj);
+
+    public T getReferenceById(long objId);
 }
