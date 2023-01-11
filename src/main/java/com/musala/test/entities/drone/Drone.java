@@ -2,7 +2,9 @@ package com.musala.test.entities.drone;
 
 import com.musala.test.entities.medication.Medication;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Lazy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,8 @@ TODO cascade updates on status, specs and load
 @Entity
 public class Drone {
 
-    private final static int MAX_WEIGHT = 500;
+    public final static int MAX_WEIGHT = 500;
+    public final static double MIN_BATTERY_LVL_FOR_LOADING = 0.25;
     enum DroneModel {
         LIGHTWEIGHT, MIDDLEWEIGHT, CRUISERWEIGHT, HEAVYWEIGHT
     }
@@ -30,11 +33,15 @@ public class Drone {
 
     @OneToOne
     @JoinColumn(name="ID", unique=true, nullable=false, updatable=false)
+    @Lazy
     private DroneStatus status;
 
-    @OneToMany
-    @JoinColumn(name="DRONE_ID", unique=false, nullable=false, updatable=false)
-    private List<DroneLoad> load;
+//    @OneToMany
+//    @JoinColumn(name="DRONE_ID", unique=false)
+//    @Lazy
+//    private List<DroneLoad> load = new ArrayList<>();
+
+    public Drone() {}
 
     public Drone(String serialNo, String model, short weightLimit) {
         this.serialNo = serialNo;
@@ -46,6 +53,10 @@ public class Drone {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSerialNo() {
@@ -80,4 +91,11 @@ public class Drone {
         this.status = status;
     }
 
+//    public List<DroneLoad> getLoad() {
+//        return load;
+//    }
+//
+//    public void setLoad(List<DroneLoad> load) {
+//        this.load = load;
+//    }
 }

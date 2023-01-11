@@ -19,6 +19,8 @@ public class Medication {
     @JoinColumn(name="ID", unique=true, nullable=false, updatable=false)
     private MedicationImage image;
 
+    public Medication() {}
+
     public Medication(int weight, String code) {
         this.weight = weight;
         this.code = code;
@@ -26,6 +28,10 @@ public class Medication {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

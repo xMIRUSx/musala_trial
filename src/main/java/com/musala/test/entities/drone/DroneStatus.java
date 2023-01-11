@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class DroneStatus {
-    enum State {
+    public enum State {
         IDLE, LOADING, LOADED, DELIVERING, DELIVERED, RETURNING
     }
 
@@ -17,6 +17,8 @@ public class DroneStatus {
     private float batteryLevel;
     private String state;
     private int totalLoadWeight;
+
+    public DroneStatus() {}
 
     public DroneStatus(Long droneId) {
         this.droneId = droneId;
