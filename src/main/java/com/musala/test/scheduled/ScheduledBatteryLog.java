@@ -20,7 +20,7 @@ public class ScheduledBatteryLog {
     @Autowired
     BasicService<Drone> droneService;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 30000)
     public void reportCurrentTime() {
         List<Drone> drones = droneService.fetchAll();
         log.info("\n{}", df.format(new Date()));

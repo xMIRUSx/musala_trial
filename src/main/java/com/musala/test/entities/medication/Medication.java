@@ -2,11 +2,14 @@ package com.musala.test.entities.medication;
 
 import jakarta.persistence.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Entity
 public class Medication {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private String name; // allowed only letters, numbers, ‘-‘, ‘_’
@@ -18,6 +21,18 @@ public class Medication {
     @OneToOne
     @JoinColumn(name="ID", unique=true, nullable=false, updatable=false)
     private MedicationImage image;
+
+    public static boolean validateName(String name) {
+        Pattern pattern = Pattern.compile("[A-Za-z0-9-_]+");
+        Matcher matcher = pattern.matcher(name);
+        return matcher.matches();
+    }
+
+    public static boolean validateCode(String code) {
+        Pattern pattern = Pattern.compile("[A-Z0-9_]+");
+        Matcher matcher = pattern.matcher(code);
+        return matcher.matches();
+    }
 
     public Medication() {}
 

@@ -1,5 +1,6 @@
 package com.musala.test.entities.drone;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,9 +11,10 @@ public class DroneStatus {
 
     @Id
     private Long droneId;
-    @OneToOne(mappedBy="status")
+    @OneToOne
     @MapsId
     @JoinColumn(name="drone_id")
+    @JsonIgnore
     private Drone drone;
     private float batteryLevel;
     private String state;
@@ -20,8 +22,8 @@ public class DroneStatus {
 
     public DroneStatus() {}
 
-    public DroneStatus(Long droneId) {
-        this.droneId = droneId;
+    public DroneStatus(Drone drone) {
+        this.drone = drone;
     }
 
 
@@ -47,5 +49,13 @@ public class DroneStatus {
 
     public void setTotalLoadWeight(int totalLoadWeight) {
         this.totalLoadWeight = totalLoadWeight;
+    }
+
+    public Drone getDrone() {
+        return drone;
+    }
+
+    public void setDrone(Drone drone) {
+        this.drone = drone;
     }
 }

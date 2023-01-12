@@ -41,7 +41,7 @@ public class DroneLoadServiceImpl implements DroneLoadService {
 
     @Override
     public List<DroneLoad> getLoadForDrone(long droneId) {
-        //return droneLoadRepository.findByDroneId(droneId);
-        return null;
+        return droneLoadRepository.findByDroneId(droneId);
+//        return null;
     }
 }
