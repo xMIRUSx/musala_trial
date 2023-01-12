@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+<!--    <property name="LOG_FILE" value="/log/drones_battery.log}"/>-->
+<!--    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}drones_battery.log}"/>-->
+<!--    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>-->
+<!--    <include resource="org/springframework/boot/logging/logback/default.xml"/>-->
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/drones_battery.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="com.musala.test.scheduled.ScheduledBatteryLog" level="INFO" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
