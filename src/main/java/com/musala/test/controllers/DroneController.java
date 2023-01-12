@@ -6,7 +6,6 @@ import com.musala.test.entities.drone.DroneStatus;
 import com.musala.test.entities.medication.Medication;
 import com.musala.test.services.BasicService;
 import com.musala.test.services.DroneLoadService;
-import com.musala.test.services.DroneServiceImpl;
 import com.musala.test.services.DroneStatusService;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +60,8 @@ public class DroneController {
     }
 
 
-    @PostMapping("/drones/load")
-    public String updateDroneLoad(@RequestBody DroneLoad droneLoad) {
+    @PostMapping("/drones/load/{id}")
+    public String updateDroneLoad(@PathVariable("id") long droneId, @RequestBody List<DroneLoad> droneLoadList) {
         /*
         IN: { drone_id, [ {med_id, amnt} ] } OUT: confirmation message
 	    updating DRONE_LOAD and DRONE_STATUS tables
@@ -71,7 +70,7 @@ public class DroneController {
 	    Prevent the drone from being in LOADING state if the battery level is **below 25%**
          */
 
-        long droneId = droneLoad.getDrone().getId();
+        //long droneId = droneLoad.getDrone().getId();
 
         Drone drn = droneService.getReferenceById(droneId);
         if (drn == null) {
@@ -87,24 +86,29 @@ public class DroneController {
             // TODO make error
         }
 
-        Optional<Medication> med = medicationService.fetch(droneLoad.getMedication().getId());
-        if (med.isEmpty()) {
-            // TODO make error
-        }
-
         int loaded = droneStatus.getTotalLoadWeight();
-        int newLoadWeight = loaded + droneLoad.getAmount() * med.get().getWeight();
+        int newLoadWeight = loaded;
+        for(DroneLoad dl : droneLoadList) {
+            Optional<Medication> med = medicationService.fetch(dl.getMedication().getId());
+            if (med.isEmpty()) {
+                // TODO make error
+            }
+            dl.setMedication(med.get());
+            newLoadWeight += dl.getAmount() * med.get().getWeight();
+        }
         if (newLoadWeight > drn.getWeightLimit()) {
             // TODO make error
         }
         droneStatus.setState(newLoadWeight == drn.getWeightLimit() ? "LOADED" : "LOADING");
         droneStatus.setTotalLoadWeight(newLoadWeight);
 
-        droneLoad.setDrone(drn);
-        droneLoad.setMedication(med.get());
+        //droneLoad.setDrone(drn);
 
+        drn.getLoad().addAll(droneLoadList);
+
+        droneService.save(drn);
         droneStatusService.save(droneStatus);
-        DroneLoad dl = droneLoadService.save(droneLoad);
+        //DroneLoad dl = droneLoadService.save(droneLoad);
         return "OK";
     }
 
@@ -114,7 +118,18 @@ public class DroneController {
         IN: {drone_id} OUT: {[{%med structure%}, amount]}
 	    quering DRONE_LOAD table
          */
-        return droneLoadService.getLoadForDrone(id);
+//        List<DroneLoad> dlList = droneLoadService.getLoadForDrone(id);
+//        for(DroneLoad dl : dlList) {
+//            dl.setDrone(null);
+//        }
+
+        Optional<Drone> dr = droneService.fetch(id);
+        if (dr.isEmpty()) {
+            // TODO error message
+        }
+        List<DroneLoad> dlList = dr.get().getLoad();
+
+        return dlList;
     }
 
     @GetMapping("/drones/available")

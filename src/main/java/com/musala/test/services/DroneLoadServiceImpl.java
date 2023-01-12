@@ -24,6 +24,11 @@ public class DroneLoadServiceImpl implements DroneLoadService {
     }
 
     @Override
+    public List<DroneLoad> fetchAll() {
+        return droneLoadRepository.findAll();
+    }
+
+    @Override
     public void delete(DroneLoad obj) {
         droneLoadRepository.delete(obj);
     }
@@ -36,6 +41,7 @@ public class DroneLoadServiceImpl implements DroneLoadService {
 
     @Override
     public List<DroneLoad> getLoadForDrone(long droneId) {
-        return droneLoadRepository.findByDroneId(droneId);
+        //return droneLoadRepository.findByDroneId(droneId);
+        return null;
     }
 }

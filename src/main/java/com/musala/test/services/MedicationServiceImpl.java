@@ -5,6 +5,7 @@ import com.musala.test.repositories.MedicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class MedicationServiceImpl implements BasicService<Medication> {
     @Override
     public Optional<Medication> fetch(long droneId) {
         return medicationRepository.findById(droneId);
+    }
+
+    @Override
+    public List<Medication> fetchAll() {
+        return medicationRepository.findAll();
     }
 
     @Override

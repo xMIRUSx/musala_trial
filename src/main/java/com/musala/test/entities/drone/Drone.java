@@ -36,10 +36,9 @@ public class Drone {
     @Lazy
     private DroneStatus status;
 
-//    @OneToMany
-//    @JoinColumn(name="DRONE_ID", unique=false)
-//    @Lazy
-//    private List<DroneLoad> load = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="DRONE_ID", unique=false)
+    private List<DroneLoad> load = new ArrayList<>();
 
     public Drone() {}
 
@@ -91,11 +90,11 @@ public class Drone {
         this.status = status;
     }
 
-//    public List<DroneLoad> getLoad() {
-//        return load;
-//    }
-//
-//    public void setLoad(List<DroneLoad> load) {
-//        this.load = load;
-//    }
+    public List<DroneLoad> getLoad() {
+        return load;
+    }
+
+    public void setLoad(List<DroneLoad> load) {
+        this.load = load;
+    }
 }

@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface DroneLoadRepository extends CrudRepository<DroneLoad, Long>, JpaRepository<DroneLoad, Long> {
 
-    List<DroneLoad> findByDroneId(long droneId);
+    //List<DroneLoad> findByDroneId(long droneId);
 }

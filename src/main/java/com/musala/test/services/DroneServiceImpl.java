@@ -5,6 +5,7 @@ import com.musala.test.repositories.DroneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,11 @@ public class DroneServiceImpl implements BasicService<Drone> {
     @Override
     public Optional<Drone> fetch(long droneId) {
         return droneRepository.findById(droneId);
+    }
+
+    @Override
+    public List<Drone> fetchAll() {
+        return droneRepository.findAll();
     }
 
     @Override

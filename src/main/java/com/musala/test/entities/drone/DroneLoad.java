@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Reference;
 import java.util.List;
 
 @Entity
+@Table(name="DRONE_LOAD")
 public class DroneLoad {
 
     @Id
@@ -16,6 +17,7 @@ public class DroneLoad {
 
     @ManyToOne //(fetch = FetchType.LAZY)
     //@JoinColumn(name="DRONE_ID", insertable=false, updatable=false)
+    @JsonIgnore
     private Drone drone;
 
     @ManyToOne

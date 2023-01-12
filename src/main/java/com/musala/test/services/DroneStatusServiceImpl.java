@@ -24,6 +24,11 @@ public class DroneStatusServiceImpl implements DroneStatusService {
     }
 
     @Override
+    public List<DroneStatus> fetchAll() {
+        return droneStatusRepository.findAll();
+    }
+
+    @Override
     public void delete(DroneStatus obj) {
         droneStatusRepository.delete(obj);
     }
